@@ -3,331 +3,702 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Un Viaggio Attraverso il Jazz</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@tailwindcss/browser@latest"></script>
+    <title>Jazz Odyssey - A Journey Through Jazz History</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --jazz-dark: #0A1612;
+            --jazz-gold: #D4AF37;
+            --jazz-burgundy: #6D071A;
+            --jazz-blue: #1A2930;
+            --jazz-cream: #F5F5DC;
+        }
+        
         body {
             font-family: 'Inter', sans-serif;
+            background-color: var(--jazz-dark);
+            color: var(--jazz-cream);
+            scroll-behavior: smooth;
         }
-        .bg-jazz {
-            background-color: #0C1C28;
+        
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
         }
-        .text-jazz-primary {
-            color: #DBB077;
+        
+        .text-jazz-gold {
+            color: var(--jazz-gold);
         }
-        .text-jazz-secondary {
-            color: #8B384C;
+        
+        .bg-jazz-gold {
+            background-color: var(--jazz-gold);
         }
-        .border-jazz {
-            border-color: #432228;
+        
+        .bg-jazz-blue {
+            background-color: var(--jazz-blue);
         }
-        .bg-jazz-highlight {
-            background-color: rgba(213, 176, 119, 0.1);
+        
+        .bg-jazz-burgundy {
+            background-color: var(--jazz-burgundy);
         }
-        .hover\:bg-jazz-highlight:hover {
-            background-color: rgba(213, 176, 119, 0.2);
+        
+        .border-jazz-gold {
+            border-color: var(--jazz-gold);
         }
-        #history {
-            background-image: url('https://source.unsplash.com/random/800x600/?jazz,music,history');
-            background-size: cover;
-            background-position: center;
-            background-blend-mode: multiply;
-            background-color: rgba(12, 28, 40, 0.7);
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--jazz-dark) 0%, var(--jazz-blue) 100%);
         }
-        #styles {
-            background-image: url('https://source.unsplash.com/random/800x600/?jazz,music,styles');
-            background-size: cover;
-            background-position: center;
-            background-blend-mode: multiply;
-            background-color: rgba(12, 28, 40, 0.7);
+        
+        .vinyl {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(0deg, #111 0%, #333 100%);
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+            animation: spin 20s linear infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        #artists {
-            background-image: url('https://source.unsplash.com/random/800x600/?jazz,musicians,portrait');
-            background-size: cover;
-            background-position: center;
-            background-blend-mode: multiply;
-            background-color: rgba(12, 28, 40, 0.7);
+        
+        .vinyl::before {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--jazz-gold);
+            border: 4px solid var(--jazz-dark);
+            z-index: 2;
         }
-        #playlist {
-            background-image: url('https://source.unsplash.com/random/800x600/?jazz,music,records');
-            background-size: cover;
-            background-position: center;
-            background-blend-mode: multiply;
-            background-color: rgba(12, 28, 40, 0.7);
+        
+        .vinyl::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--jazz-dark);
+            z-index: 3;
         }
-
-        .animate-fade-in {
-            animation: fadeIn 1s ease-in-out;
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-        .animate-slide-in {
-            animation: slideIn 0.5s ease-out;
+        
+        .vinyl-pause {
+            animation-play-state: paused;
         }
-        .hover\:scale-105:hover {
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--jazz-gold);
+            border: 4px solid var(--jazz-dark);
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: -28px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--jazz-gold);
+        }
+        
+        .artist-card:hover .artist-img {
             transform: scale(1.05);
-            transition: transform 0.3s ease-in-out;
+            filter: grayscale(0%);
         }
-
+        
+        .artist-img {
+            transition: all 0.3s ease;
+            filter: grayscale(30%);
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-        @keyframes slideIn {
-            from { transform: translateY(20px); opacity: 0; }
+        
+        .slide-up {
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
-<body class="bg-jazz">
-    <header class="py-6 px-4 sm:px-6 lg:px-8 animate-fade-in">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <h1 class="text-3xl font-bold text-jazz-primary">Un Viaggio Attraverso il Jazz</h1>
+<body class="gradient-bg">
+    <!-- Animated Background Elements -->
+    <div class="fixed inset-0 overflow-hidden opacity-10">
+        <div class="absolute top-20 left-10 w-4 h-4 rounded-full bg-jazz-gold animate-pulse"></div>
+        <div class="absolute top-1/3 right-20 w-6 h-6 rounded-full bg-jazz-burgundy animate-pulse" style="animation-delay: 0.5s;"></div>
+        <div class="absolute bottom-1/4 left-1/3 w-3 h-3 rounded-full bg-jazz-gold animate-pulse" style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-20 right-1/4 w-5 h-5 rounded-full bg-jazz-burgundy animate-pulse" style="animation-delay: 1.5s;"></div>
+    </div>
+
+    <!-- Header with Vinyl Animation -->
+    <header class="relative z-10 py-8 px-4 sm:px-6 lg:px-8 fade-in">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center mb-6 md:mb-0">
+                <div class="vinyl vinyl-pause mr-6 cursor-pointer" id="main-vinyl">
+                    <div class="absolute inset-0 rounded-full overflow-hidden">
+                        <img src="https://source.unsplash.com/random/300x300/?jazz,record" alt="Jazz Vinyl" class="w-full h-full object-cover opacity-80">
+                    </div>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold text-jazz-gold">Jazz Odyssey</h1>
+            </div>
+            
             <nav class="hidden md:block">
-                <ul class="flex space-x-6">
-                    <li><a href="#history" class="text-jazz-secondary hover:text-white transition-colors hover:scale-105">Storia</a></li>
-                    <li><a href="#styles" class="text-jazz-secondary hover:text-white transition-colors hover:scale-105">Stili</a></li>
-                    <li><a href="#artists" class="text-jazz-secondary hover:text-white transition-colors hover:scale-105">Artisti</a></li>
-                    <li><a href="#playlist" class="text-jazz-secondary hover:text-white transition-colors hover:scale-105">Playlist</a></li>
+                <ul class="flex space-x-8">
+                    <li><a href="#history" class="text-lg font-medium text-white hover:text-jazz-gold transition-colors flex items-center group">
+                        <i class="fas fa-history mr-2 text-jazz-gold group-hover:animate-spin"></i> Storia
+                    </a></li>
+                    <li><a href="#styles" class="text-lg font-medium text-white hover:text-jazz-gold transition-colors flex items-center group">
+                        <i class="fas fa-music mr-2 text-jazz-gold group-hover:animate-pulse"></i> Stili
+                    </a></li>
+                    <li><a href="#artists" class="text-lg font-medium text-white hover:text-jazz-gold transition-colors flex items-center group">
+                        <i class="fas fa-user-tie mr-2 text-jazz-gold group-hover:animate-bounce"></i> Artisti
+                    </a></li>
+                    <li><a href="#playlist" class="text-lg font-medium text-white hover:text-jazz-gold transition-colors flex items-center group">
+                        <i class="fas fa-headphones mr-2 text-jazz-gold group-hover:animate-ping"></i> Playlist
+                    </a></li>
                 </ul>
             </nav>
-            <button id="hamburger-btn" class="md:hidden text-jazz-secondary focus:outline-none" aria-label="Toggle Navigation">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                </svg>
+            
+            <button id="hamburger-btn" class="md:hidden text-white focus:outline-none text-2xl" aria-label="Toggle Navigation">
+                <i class="fas fa-bars"></i>
             </button>
         </div>
     </header>
 
-    <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-90 z-50">
-        <div class="bg-gray-800 w-80 h-full absolute right-0 p-6">
-            <div class="flex justify-end mb-4">
-                <button id="close-menu-btn" class="text-jazz-secondary focus:outline-none" aria-label="Close Menu">
-                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-            <nav class="block">
-                <ul class="space-y-4">
-                     <li><a href="#history" class="block text-jazz-secondary hover:text-white transition-colors text-lg hover:scale-105">Storia</a></li>
-                    <li><a href="#styles" class="block text-jazz-secondary hover:text-white transition-colors text-lg hover:scale-105">Stili</a></li>
-                    <li><a href="#artists" class="block text-jazz-secondary hover:text-white transition-colors text-lg hover:scale-105">Artisti</a></li>
-                    <li><a href="#playlist" class="block text-jazz-secondary hover:text-white transition-colors text-lg hover:scale-105">Playlist</a></li>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden fixed inset-0 z-50 bg-black bg-opacity-90 backdrop-blur-sm">
+        <div class="relative h-full w-full flex items-center justify-center">
+            <button id="close-menu-btn" class="absolute top-8 right-8 text-white text-3xl focus:outline-none" aria-label="Close Menu">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <nav class="text-center">
+                <ul class="space-y-8">
+                    <li><a href="#history" class="text-2xl font-medium text-white hover:text-jazz-gold transition-colors flex items-center justify-center group">
+                        <i class="fas fa-history mr-4 text-jazz-gold"></i> Storia
+                    </a></li>
+                    <li><a href="#styles" class="text-2xl font-medium text-white hover:text-jazz-gold transition-colors flex items-center justify-center group">
+                        <i class="fas fa-music mr-4 text-jazz-gold"></i> Stili
+                    </a></li>
+                    <li><a href="#artists" class="text-2xl font-medium text-white hover:text-jazz-gold transition-colors flex items-center justify-center group">
+                        <i class="fas fa-user-tie mr-4 text-jazz-gold"></i> Artisti
+                    </a></li>
+                    <li><a href="#playlist" class="text-2xl font-medium text-white hover:text-jazz-gold transition-colors flex items-center justify-center group">
+                        <i class="fas fa-headphones mr-4 text-jazz-gold"></i> Playlist
+                    </a></li>
                 </ul>
             </nav>
         </div>
     </div>
 
-    <main class="px-4 sm:px-6 lg:px-8">
-        <section id="history" class="py-12 animate-slide-in">
-            <div class="max-w-7xl mx-auto">
-                <h2 class="text-3xl font-semibold text-jazz-primary mb-6 text-center">La Storia del Jazz</h2>
-                <p class="text-jazz-secondary text-lg leading-relaxed">
-                    Il jazz, un genere nato nelle comunità afroamericane di New Orleans alla fine del 19° e all'inizio del 20° secolo, è un ricco arazzo di influenze musicali. Combina elementi di blues, ragtime e musica di banda di ottoni europea, caratterizzato da improvvisazione, sincopazione e la nota swing. Dalle sue umili origini in raduni sociali e sale da ballo, il jazz si diffuse rapidamente in America e poi nel mondo, evolvendosi e ramificandosi in diversi stili.
+    <main class="relative z-10 px-4 sm:px-6 lg:px-8">
+        <!-- Hero Section -->
+        <section class="py-16 md:py-24 text-center slide-up">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-5xl md:text-6xl font-bold text-jazz-gold mb-6">Un Viaggio Attraverso il Jazz</h2>
+                <p class="text-xl md:text-2xl text-white mb-8 leading-relaxed">
+                    Esplora la ricca storia, gli stili vibranti e i leggendari artisti che hanno definito questa forma d'arte americana.
                 </p>
-                <p class="text-jazz-secondary text-lg leading-relaxed mt-4">
-                    Lo sviluppo iniziale del jazz fu fortemente influenzato dall'ambiente culturale e sociale unico di New Orleans. La storia della città come crogiolo di culture, tra cui africana, europea e caraibica, ha fornito un terreno fertile per l'innovazione musicale. L'eredità della schiavitù, l'influenza degli spiritual e delle canzoni di lavoro e le vibranti tradizioni delle bande di ottoni hanno contribuito alla nascita di questa nuova forma d'arte americana.
-                </p>
+                <a href="#history" class="inline-block bg-jazz-gold text-jazz-dark px-8 py-3 rounded-full hover:bg-opacity-90 transition-colors text-lg font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                    Inizia il Viaggio <i class="fas fa-arrow-down ml-2"></i>
+                </a>
             </div>
         </section>
 
-        <section id="styles" class="py-12 bg-jazz-highlight animate-slide-in">
+        <!-- History Section -->
+        <section id="history" class="py-16 slide-up">
             <div class="max-w-7xl mx-auto">
-                <h2 class="text-3xl font-semibold text-jazz-primary mb-6 text-center">L'Evoluzione degli Stili Jazz</h2>
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-jazz-gold mb-4">La Storia del Jazz</h2>
+                    <div class="w-24 h-1 bg-jazz-gold mx-auto"></div>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="relative pl-12 timeline">
+                        <div class="timeline-item relative mb-12">
+                            <h3 class="text-2xl font-bold text-jazz-gold mb-2">Origini (1890-1910)</h3>
+                            <p class="text-white leading-relaxed">
+                                Il jazz emerge dalle comunità afroamericane di New Orleans, fondendo blues, ragtime e musica di banda di ottoni europea.
+                            </p>
+                        </div>
+                        
+                        <div class="timeline-item relative mb-12">
+                            <h3 class="text-2xl font-bold text-jazz-gold mb-2">Era dello Swing (1930-1945)</h3>
+                            <p class="text-white leading-relaxed">
+                                Le grandi orchestre dominano la scena musicale americana, con artisti come Duke Ellington e Benny Goodman.
+                            </p>
+                        </div>
+                        
+                        <div class="timeline-item relative mb-12">
+                            <h3 class="text-2xl font-bold text-jazz-gold mb-2">Bebop Revolution (1940-1950)</h3>
+                            <p class="text-white leading-relaxed">
+                                Charlie Parker e Dizzy Gillespie introducono un nuovo stile complesso e intellettuale.
+                            </p>
+                        </div>
+                        
+                        <div class="timeline-item relative">
+                            <h3 class="text-2xl font-bold text-jazz-gold mb-2">Era Moderna (1960-Presente)</h3>
+                            <p class="text-white leading-relaxed">
+                                Il jazz si diversifica in molti stili, dal free jazz alla fusion e oltre.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-jazz-blue p-8 rounded-xl shadow-2xl border border-jazz-gold border-opacity-30">
+                        <h3 class="text-2xl font-bold text-jazz-gold mb-4">New Orleans: La Culla del Jazz</h3>
+                        <p class="text-white leading-relaxed mb-6">
+                            Lo sviluppo iniziale del jazz fu fortemente influenzato dall'ambiente culturale e sociale unico di New Orleans. La storia della città come crogiolo di culture, tra cui africana, europea e caraibica, ha fornito un terreno fertile per l'innovazione musicale.
+                        </p>
+                        <p class="text-white leading-relaxed">
+                            L'eredità della schiavitù, l'influenza degli spiritual e delle canzoni di lavoro e le vibranti tradizioni delle bande di ottoni hanno contribuito alla nascita di questa nuova forma d'arte americana.
+                        </p>
+                        <div class="mt-6">
+                            <img src="https://source.unsplash.com/random/800x500/?new,orleans,jazz" alt="New Orleans Jazz" class="rounded-lg shadow-lg w-full h-auto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Styles Section -->
+        <section id="styles" class="py-16 bg-jazz-blue bg-opacity-50 slide-up">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-jazz-gold mb-4">L'Evoluzione degli Stili Jazz</h2>
+                    <div class="w-24 h-1 bg-jazz-gold mx-auto"></div>
+                </div>
+                
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="p-6 rounded-lg border border-jazz hover:shadow-lg transition-shadow duration-300">
-                        <h3 class="text-xl font-semibold text-white mb-2">Early Jazz (1910s-1930s)</h3>
-                        <p class="text-jazz-secondary text-lg leading-relaxed">
+                    <div class="bg-jazz-dark p-6 rounded-xl border border-jazz-gold border-opacity-20 hover:border-opacity-50 transition-all duration-300 hover:shadow-xl hover:transform hover:-translate-y-2">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-jazz-gold flex items-center justify-center mr-4">
+                                <i class="fas fa-music text-jazz-dark"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-jazz-gold">Early Jazz (1910s-1930s)</h3>
+                        </div>
+                        <p class="text-white leading-relaxed">
                             Conosciuto anche come Dixieland, questo stile presenta improvvisazione collettiva, ritmi energici e un focus sull'esecuzione d'insieme. Le figure chiave includono Louis Armstrong e Jelly Roll Morton.
                         </p>
                     </div>
-                    <div class="p-6 rounded-lg border border-jazz hover:shadow-lg transition-shadow duration-300">
-                        <h3 class="text-xl font-semibold text-white mb-2">Swing (1930s-1940s)</h3>
-                        <p class="text-jazz-secondary text-lg leading-relaxed">
+                    
+                    <div class="bg-jazz-dark p-6 rounded-xl border border-jazz-gold border-opacity-20 hover:border-opacity-50 transition-all duration-300 hover:shadow-xl hover:transform hover:-translate-y-2">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-jazz-gold flex items-center justify-center mr-4">
+                                <i class="fas fa-music text-jazz-dark"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-jazz-gold">Swing (1930s-1940s)</h3>
+                        </div>
+                        <p class="text-white leading-relaxed">
                             Caratterizzato da grandi orchestre, ritmi ballabili e un suono più fluido e arrangiato. Benny Goodman, Duke Ellington e Count Basie erano figure di spicco.
                         </p>
                     </div>
-                    <div class="p-6 rounded-lg border border-jazz hover:shadow-lg transition-shadow duration-300">
-                        <h3 class="text-xl font-semibold text-white mb-2">Bebop (1940s-1950s)</h3>
-                        <p class="text-jazz-secondary text-lg leading-relaxed">
+                    
+                    <div class="bg-jazz-dark p-6 rounded-xl border border-jazz-gold border-opacity-20 hover:border-opacity-50 transition-all duration-300 hover:shadow-xl hover:transform hover:-translate-y-2">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-jazz-gold flex items-center justify-center mr-4">
+                                <i class="fas fa-music text-jazz-dark"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-jazz-gold">Bebop (1940s-1950s)</h3>
+                        </div>
+                        <p class="text-white leading-relaxed">
                             Una reazione allo swing, il bebop è più veloce, più complesso e enfatizza l'improvvisazione individuale. Charlie Parker e Dizzy Gillespie sono stati pionieri di questo stile.
                         </p>
                     </div>
-                    <div class="p-6 rounded-lg border border-jazz hover:shadow-lg transition-shadow duration-300">
-                        <h3 class="text-xl font-semibold text-white mb-2">Cool Jazz (Anni '50)</h3>
-                        <p class="text-jazz-secondary text-lg leading-relaxed">
+                    
+                    <div class="bg-jazz-dark p-6 rounded-xl border border-jazz-gold border-opacity-20 hover:border-opacity-50 transition-all duration-300 hover:shadow-xl hover:transform hover:-translate-y-2">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-jazz-gold flex items-center justify-center mr-4">
+                                <i class="fas fa-music text-jazz-dark"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-jazz-gold">Cool Jazz (Anni '50)</h3>
+                        </div>
+                        <p class="text-white leading-relaxed">
                             Uno stile più rilassato e melodico, spesso associato alla West Coast. "Birth of the Cool" di Miles Davis è un album fondamentale.
                         </p>
                     </div>
-                    <div class="p-6 rounded-lg border border-jazz hover:shadow-lg transition-shadow duration-300">
-                        <h3 class="text-xl font-semibold text-white mb-2">Hard Bop (Anni '50-60)</h3>
-                        <p class="text-jazz-secondary text-lg leading-relaxed">
+                    
+                    <div class="bg-jazz-dark p-6 rounded-xl border border-jazz-gold border-opacity-20 hover:border-opacity-50 transition-all duration-300 hover:shadow-xl hover:transform hover:-translate-y-2">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-jazz-gold flex items-center justify-center mr-4">
+                                <i class="fas fa-music text-jazz-dark"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-jazz-gold">Hard Bop (Anni '50-60)</h3>
+                        </div>
+                        <p class="text-white leading-relaxed">
                             Un ritorno all'energia del bebop, con una più forte influenza blues e melodie gospel. Art Blakey e Horace Silver erano figure chiave.
                         </p>
                     </div>
-                     <div class="p-6 rounded-lg border border-jazz hover:shadow-lg transition-shadow duration-300">
-                        <h3 class="text-xl font-semibold text-white mb-2">Free Jazz (Anni '60)</h3>
-                        <p class="text-jazz-secondary text-lg leading-relaxed">
-                           Questo stile abbandona le strutture tradizionali, l'armonia e il ritmo, enfatizzando l'improvvisazione e la sperimentazione. Ornette Coleman e John Coltrane erano innovatori.
-                        </p>
-                    </div>
-                    <div class="p-6 rounded-lg border border-jazz hover:shadow-lg transition-shadow duration-300">
-                        <h3 class="text-xl font-semibold text-white mb-2">Fusion (Anni '70-Presente)</h3>
-                        <p class="text-jazz-secondary text-lg leading-relaxed">
-                            Combina il jazz con altri generi come rock, funk e musica elettronica. "Bitches Brew" di Miles Davis e Weather Report sono esempi importanti.
-                        </p>
-                    </div>
-                    <div class="p-6 rounded-lg border border-jazz hover:shadow-lg transition-shadow duration-300">
-                        <h3 class="text-xl font-semibold text-white mb-2">Contemporary Jazz (Anni '80-Presente)</h3>
-                        <p class="text-jazz-secondary text-lg leading-relaxed">
-                            Una vasta categoria che comprende vari stili moderni, tra cui smooth jazz, neo-bop e avanguardia.
+                    
+                    <div class="bg-jazz-dark p-6 rounded-xl border border-jazz-gold border-opacity-20 hover:border-opacity-50 transition-all duration-300 hover:shadow-xl hover:transform hover:-translate-y-2">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-jazz-gold flex items-center justify-center mr-4">
+                                <i class="fas fa-music text-jazz-dark"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-jazz-gold">Free Jazz (Anni '60)</h3>
+                        </div>
+                        <p class="text-white leading-relaxed">
+                            Questo stile abbandona le strutture tradizionali, l'armonia e il ritmo, enfatizzando l'improvvisazione e la sperimentazione. Ornette Coleman e John Coltrane erano innovatori.
                         </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="artists" class="py-12 animate-slide-in">
+        <!-- Artists Section -->
+        <section id="artists" class="py-16 slide-up">
             <div class="max-w-7xl mx-auto">
-                <h2 class="text-3xl font-semibold text-jazz-primary mb-6 text-center">Artisti Jazz Influenti</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="p-4 rounded-lg border border-jazz hover:shadow-lg transition-shadow duration-300">
-                        <h3 class="text-xl font-semibold text-white mb-2">Louis Armstrong (1901-1971)</h3>
-                        <p class="text-jazz-secondary text-lg leading-relaxed">
-                            Un leggendario trombettista e cantante, Armstrong è stato una figura fondamentale nel jazz, noto per il suo virtuosismo e la sua carismatica presenza scenica.
-                        </p>
-                         <p class="text-jazz-secondary text-lg leading-relaxed mt-2">
-                            <a href="https://www.youtube.com/watch?v=8IJzL1ofL0c" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors">Ascolta su YouTube</a>
-                        </p>
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-jazz-gold mb-4">Artisti Jazz Influenti</h2>
+                    <div class="w-24 h-1 bg-jazz-gold mx-auto"></div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="artist-card bg-jazz-blue rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                        <div class="relative overflow-hidden h-64">
+                            <img src="https://source.unsplash.com/random/600x400/?louis,armstrong" alt="Louis Armstrong" class="w-full h-full object-cover artist-img">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                                <h3 class="text-2xl font-bold text-white">Louis Armstrong</h3>
+                                <p class="text-jazz-gold">1901-1971</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-white leading-relaxed mb-4">
+                                Un leggendario trombettista e cantante, Armstrong è stato una figura fondamentale nel jazz, noto per il suo virtuosismo e la sua carismatica presenza scenica.
+                            </p>
+                            <a href="https://www.youtube.com/watch?v=8IJzL1ofL0c" target="_blank" class="inline-flex items-center text-jazz-gold hover:text-white transition-colors">
+                                <i class="fab fa-youtube mr-2"></i> Ascolta su YouTube
+                            </a>
+                        </div>
                     </div>
-                    <div class="p-4 rounded-lg border border-jazz hover:shadow-lg transition-shadow duration-300">
-                        <h3 class="text-xl font-semibold text-white mb-2">Duke Ellington (1899-1974)</h3>
-                        <p class="text-jazz-secondary text-lg leading-relaxed">
-                            Un prolifico compositore e bandleader, le orchestre di Ellington erano note per i loro sofisticati arrangiamenti e le armonie innovative.
-                         </p>
-                         <p class="text-jazz-secondary text-lg leading-relaxed mt-2">
-                            <a href="https://www.youtube.com/watch?v=k3JvWvWvKio" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors">Ascolta su YouTube</a>
-                        </p>
+                    
+                    <div class="artist-card bg-jazz-blue rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                        <div class="relative overflow-hidden h-64">
+                            <img src="https://source.unsplash.com/random/600x400/?duke,ellington" alt="Duke Ellington" class="w-full h-full object-cover artist-img">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                                <h3 class="text-2xl font-bold text-white">Duke Ellington</h3>
+                                <p class="text-jazz-gold">1899-1974</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-white leading-relaxed mb-4">
+                                Un prolifico compositore e bandleader, le orchestre di Ellington erano note per i loro sofisticati arrangiamenti e le armonie innovative.
+                            </p>
+                            <a href="https://www.youtube.com/watch?v=k3JvWvWvKio" target="_blank" class="inline-flex items-center text-jazz-gold hover:text-white transition-colors">
+                                <i class="fab fa-youtube mr-2"></i> Ascolta su YouTube
+                            </a>
+                        </div>
                     </div>
-                    <div class="p-4 rounded-lg border border-jazz hover:shadow-lg transition-shadow duration-300">
-                        <h3 class="text-xl font-semibold text-white mb-2">Charlie Parker (1920-1955)</h3>
-                        <p class="text-jazz-secondary text-lg leading-relaxed">
-                            Un sassofonista e compositore molto influente, Parker è stato una figura chiave nello sviluppo del bebop, noto per la sua virtuosa improvvisazione.
-                        </p>
-                        <p class="text-jazz-secondary text-lg leading-relaxed mt-2">
-                            <a href="https://www.youtube.com/watch?v=f1kK8l1vJlk" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors">Ascolta su YouTube</a>
-                        </p>
+                    
+                    <div class="artist-card bg-jazz-blue rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                        <div class="relative overflow-hidden h-64">
+                            <img src="https://source.unsplash.com/random/600x400/?charlie,parker" alt="Charlie Parker" class="w-full h-full object-cover artist-img">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                                <h3 class="text-2xl font-bold text-white">Charlie Parker</h3>
+                                <p class="text-jazz-gold">1920-1955</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-white leading-relaxed mb-4">
+                                Un sassofonista e compositore molto influente, Parker è stato una figura chiave nello sviluppo del bebop, noto per la sua virtuosa improvvisazione.
+                            </p>
+                            <a href="https://www.youtube.com/watch?v=f1kK8l1vJlk" target="_blank" class="inline-flex items-center text-jazz-gold hover:text-white transition-colors">
+                                <i class="fab fa-youtube mr-2"></i> Ascolta su YouTube
+                            </a>
+                        </div>
                     </div>
-                    <div class="p-4 rounded-lg border border-jazz hover:shadow-lg transition-shadow duration-300">
-                        <h3 class="text-xl font-semibold text-white mb-2">Miles Davis (1926-1991)</h3>
-                        <p class="text-jazz-secondary text-lg leading-relaxed">
-                           Un visionario trombettista e bandleader, Davis è stato all'avanguardia di diversi stili jazz, tra cui cool jazz, hard bop e fusion.
-                        </p>
-                        <p class="text-jazz-secondary text-lg leading-relaxed mt-2">
-                            <a href="https://www.youtube.com/watch?v=kbxtYqA6ypM" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors">Ascolta su YouTube</a>
-                        </p>
+                    
+                    <div class="artist-card bg-jazz-blue rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                        <div class="relative overflow-hidden h-64">
+                            <img src="https://source.unsplash.com/random/600x400/?miles,davis" alt="Miles Davis" class="w-full h-full object-cover artist-img">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                                <h3 class="text-2xl font-bold text-white">Miles Davis</h3>
+                                <p class="text-jazz-gold">1926-1991</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-white leading-relaxed mb-4">
+                                Un visionario trombettista e bandleader, Davis è stato all'avanguardia di diversi stili jazz, tra cui cool jazz, hard bop e fusion.
+                            </p>
+                            <a href="https://www.youtube.com/watch?v=kbxtYqA6ypM" target="_blank" class="inline-flex items-center text-jazz-gold hover:text-white transition-colors">
+                                <i class="fab fa-youtube mr-2"></i> Ascolta su YouTube
+                            </a>
+                        </div>
                     </div>
-                    <div class="p-4 rounded-lg border border-jazz hover:shadow-lg transition-shadow duration-300">
-                        <h3 class="text-xl font-semibold text-white mb-2">John Coltrane (1926-1967)</h3>
-                        <p class="text-jazz-secondary text-lg leading-relaxed">
-                            Un sassofonista e compositore rivoluzionario, Coltrane ha spinto i confini del jazz con le sue armonie innovative e le tecniche di improvvisazione.
-                        </p>
-                        <p class="text-jazz-secondary text-lg leading-relaxed mt-2">
-                            <a href="https://www.youtube.com/watch?v=PdhYhOBw55c" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors">Ascolta su YouTube</a>
-                        </p>
+                    
+                    <div class="artist-card bg-jazz-blue rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                        <div class="relative overflow-hidden h-64">
+                            <img src="https://source.unsplash.com/random/600x400/?john,coltrane" alt="John Coltrane" class="w-full h-full object-cover artist-img">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                                <h3 class="text-2xl font-bold text-white">John Coltrane</h3>
+                                <p class="text-jazz-gold">1926-1967</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-white leading-relaxed mb-4">
+                                Un sassofonista e compositore rivoluzionario, Coltrane ha spinto i confini del jazz con le sue armonie innovative e le tecniche di improvvisazione.
+                            </p>
+                            <a href="https://www.youtube.com/watch?v=PdhYhOBw55c" target="_blank" class="inline-flex items-center text-jazz-gold hover:text-white transition-colors">
+                                <i class="fab fa-youtube mr-2"></i> Ascolta su YouTube
+                            </a>
+                        </div>
                     </div>
-                    <div class="p-4 rounded-lg border border-jazz hover:shadow-lg transition-shadow duration-300">
-                        <h3 class="text-xl font-semibold text-white mb-2">Ella Fitzgerald (1917-1996)</h3>
-                        <p class="text-jazz-secondary text-lg leading-relaxed">
-                            Conosciuta come la "First Lady of Song", Fitzgerald era una cantante leggendaria con una notevole estensione, dizione impeccabile e straordinarie capacità di improvvisazione.
-                        </p>
-                        <p class="text-jazz-secondary text-lg leading-relaxed mt-2">
-                            <a href="https://www.youtube.com/watch?v=IlK5QkdgMaQ" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors">Ascolta su YouTube</a>
-                        </p>
+                    
+                    <div class="artist-card bg-jazz-blue rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                        <div class="relative overflow-hidden h-64">
+                            <img src="https://source.unsplash.com/random/600x400/?ella,fitzgerald" alt="Ella Fitzgerald" class="w-full h-full object-cover artist-img">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                                <h3 class="text-2xl font-bold text-white">Ella Fitzgerald</h3>
+                                <p class="text-jazz-gold">1917-1996</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-white leading-relaxed mb-4">
+                                Conosciuta come la "First Lady of Song", Fitzgerald era una cantante leggendaria con una notevole estensione, dizione impeccabile e straordinarie capacità di improvvisazione.
+                            </p>
+                            <a href="https://www.youtube.com/watch?v=IlK5QkdgMaQ" target="_blank" class="inline-flex items-center text-jazz-gold hover:text-white transition-colors">
+                                <i class="fab fa-youtube mr-2"></i> Ascolta su YouTube
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="playlist" class="py-12 bg-jazz-highlight animate-slide-in">
+        <!-- Playlist Section -->
+        <section id="playlist" class="py-16 bg-jazz-burgundy bg-opacity-50 slide-up">
             <div class="max-w-7xl mx-auto">
-                <h2 class="text-3xl font-semibold text-jazz-primary mb-6 text-center">Playlist Jazz in Evidenza</h2>
-                <div class="rounded-lg overflow-hidden border border-jazz shadow-lg mb-4">
-                    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37talafIK8enbbryNV5ZCg?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-jazz-gold mb-4">Playlist Jazz in Evidenza</h2>
+                    <div class="w-24 h-1 bg-jazz-gold mx-auto"></div>
                 </div>
-                <div class="text-center">
-                    <a href="https://open.spotify.com/playlist/37talafIK8enbbryNV5ZCg?si=66106cb1e4e24b26" target="_blank" class="inline-block bg-jazz-primary text-white px-8 py-3 rounded-full hover:bg-opacity-90 transition-colors text-lg font-semibold">
-                        Vai alla Playlist Completa
-                    </a>
-                 <p class="text-jazz-secondary text-lg leading-relaxed mt-4 ">
-                    Goditi questa selezione curata di musica jazz. Immergiti nei suoni delle leggende e degli artisti contemporanei.
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="rounded-xl overflow-hidden shadow-2xl">
+                        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37talafIK8enbbryNV5ZCg?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-bold text-jazz-gold mb-4">Esplora il Suono del Jazz</h3>
+                        <p class="text-white leading-relaxed mb-6">
+                            Goditi questa selezione curata di musica jazz che attraversa decenni e stili. Dalle prime registrazioni di New Orleans alle innovazioni moderne, questa playlist cattura l'essenza del jazz.
+                        </p>
+                        <p class="text-white leading-relaxed mb-8">
+                            Scopri perché il jazz continua a ispirare e influenzare generazioni di musicisti e ascoltatori in tutto il mondo.
+                        </p>
+                        <a href="https://open.spotify.com/playlist/37talafIK8enbbryNV5ZCg?si=66106cb1e4e24b26" target="_blank" class="inline-flex items-center bg-jazz-gold text-jazz-dark px-8 py-3 rounded-full hover:bg-opacity-90 transition-colors text-lg font-semibold shadow-lg hover:shadow-xl">
+                            <i class="fab fa-spotify mr-2 text-2xl"></i> Vai alla Playlist Completa
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Newsletter Section -->
+        <section class="py-16 slide-up">
+            <div class="max-w-3xl mx-auto bg-jazz-blue rounded-xl p-8 shadow-lg border border-jazz-gold border-opacity-30">
+                <div class="text-center mb-6">
+                    <h2 class="text-3xl font-bold text-jazz-gold mb-2">Rimani in Contatto</h2>
+                    <p class="text-white">Iscriviti per ricevere aggiornamenti su nuovi contenuti jazz</p>
+                </div>
+                
+                <form class="flex flex-col sm:flex-row gap-4">
+                    <input type="email" placeholder="La tua email" class="flex-grow px-4 py-3 rounded-lg bg-jazz-dark border border-jazz-gold border-opacity-30 text-white focus:outline-none focus:ring-2 focus:ring-jazz-gold">
+                    <button type="submit" class="bg-jazz-gold text-jazz-dark px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-colors shadow hover:shadow-md">
+                        Iscriviti <i class="fas fa-paper-plane ml-2"></i>
+                    </button>
+                </form>
+                
+                <p class="text-sm text-white text-opacity-70 mt-4 text-center">
+                    Non condivideremo mai la tua email con nessuno.
                 </p>
-                </div>
             </div>
         </section>
     </main>
 
-    <footer class="py-6 px-4 sm:px-6 lg:px-8 mt-12 animate-fade-in">
-        <div class="max-w-7xl mx-auto text-center text-jazz-secondary">
-            <p>© 2023 Un Viaggio Attraverso il Jazz. Tutti i diritti riservati.</p>
-            <p>
-                <a href="https://yourwebsite.com/privacy" class="hover:text-white transition-colors">Politica sulla Privacy</a> |
-                <a href="https://yourwebsite.com/terms" class="hover:text-white transition-colors">Termini di Servizio</a>
-            </p>
+    <footer class="relative z-10 py-12 px-4 sm:px-6 lg:px-8 border-t border-jazz-gold border-opacity-20 fade-in">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-jazz-gold mb-4">Jazz Odyssey</h3>
+                    <p class="text-white text-opacity-70">
+                        Esplorando la ricca storia e l'evoluzione del jazz attraverso i decenni.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-jazz-gold mb-4">Navigazione</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#history" class="text-white text-opacity-70 hover:text-jazz-gold transition-colors">Storia</a></li>
+                        <li><a href="#styles" class="text-white text-opacity-70 hover:text-jazz-gold transition-colors">Stili</a></li>
+                        <li><a href="#artists" class="text-white text-opacity-70 hover:text-jazz-gold transition-colors">Artisti</a></li>
+                        <li><a href="#playlist" class="text-white text-opacity-70 hover:text-jazz-gold transition-colors">Playlist</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-jazz-gold mb-4">Risorse</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-white text-opacity-70 hover:text-jazz-gold transition-colors">Libri sul Jazz</a></li>
+                        <li><a href="#" class="text-white text-opacity-70 hover:text-jazz-gold transition-colors">Documentari</a></li>
+                        <li><a href="#" class="text-white text-opacity-70 hover:text-jazz-gold transition-colors">Festival</a></li>
+                        <li><a href="#" class="text-white text-opacity-70 hover:text-jazz-gold transition-colors">Strumenti</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-jazz-gold mb-4">Contatti</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="text-white text-opacity-70 hover:text-jazz-gold transition-colors text-xl">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="text-white text-opacity-70 hover:text-jazz-gold transition-colors text-xl">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-white text-opacity-70 hover:text-jazz-gold transition-colors text-xl">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-white text-opacity-70 hover:text-jazz-gold transition-colors text-xl">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                    <p class="text-white text-opacity-70">
+                        info@jazzodyssey.com<br>
+                        +39 123 456 7890
+                    </p>
+                </div>
+            </div>
+            
+            <div class="border-t border-jazz-gold border-opacity-20 mt-8 pt-8 text-center text-white text-opacity-50">
+                <p>© 2023 Jazz Odyssey. Tutti i diritti riservati.</p>
+                <div class="flex justify-center space-x-4 mt-2">
+                    <a href="#" class="hover:text-jazz-gold transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-jazz-gold transition-colors">Termini di Servizio</a>
+                </div>
+            </div>
         </div>
     </footer>
 
     <script>
+        // Mobile menu toggle
         const hamburgerBtn = document.getElementById("hamburger-btn");
         const mobileMenu = document.getElementById("mobile-menu");
         const closeMenuBtn = document.getElementById("close-menu-btn");
         const mobileMenuLinks = mobileMenu.querySelectorAll("a");
-        const navLinks = document.querySelectorAll('header nav a');
-        const sections = document.querySelectorAll('section');
-
+        
         function toggleMobileMenu() {
             mobileMenu.classList.toggle("hidden");
+            document.body.classList.toggle("overflow-hidden");
         }
-
+        
         hamburgerBtn.addEventListener("click", toggleMobileMenu);
         closeMenuBtn.addEventListener("click", toggleMobileMenu);
         mobileMenuLinks.forEach(link => {
             link.addEventListener("click", toggleMobileMenu);
         });
-
-        document.addEventListener('click', (event) => {
-            if (!mobileMenu.classList.contains('hidden') && !mobileMenu.contains(event.target) && event.target !== hamburgerBtn) {
-                toggleMobileMenu();
-            }
+        
+        // Vinyl animation
+        const vinyl = document.getElementById("main-vinyl");
+        vinyl.addEventListener("mouseenter", () => {
+            vinyl.classList.remove("vinyl-pause");
         });
-
-        function updateActiveNavLink() {
-            let currentSectionId = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (window.scrollY >= sectionTop - 100 && window.scrollY < sectionTop + sectionHeight - 100) {
-                    currentSectionId = section.getAttribute('id');
+        
+        vinyl.addEventListener("mouseleave", () => {
+            vinyl.classList.add("vinyl-pause");
+        });
+        
+        // Scroll animation
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("fade-in");
+                    observer.unobserve(entry.target);
                 }
             });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').slice(1) === currentSectionId) {
-                    link.classList.add('active');
-                }
-            });
-        }
-
-        window.addEventListener('scroll', updateActiveNavLink);
-
+        }, observerOptions);
+        
+        document.querySelectorAll("section").forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-
+                
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
+            });
+        });
+        
+        // Active nav link highlighting
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('header nav a, #mobile-menu a');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('text-white', 'font-bold');
+                link.classList.add('text-white', 'text-opacity-70');
+                
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.remove('text-white', 'text-opacity-70');
+                    link.classList.add('text-jazz-gold', 'font-bold');
+                }
             });
         });
     </script>
